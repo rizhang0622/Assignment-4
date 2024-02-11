@@ -28,8 +28,21 @@ public class LinkActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_link);
 
+        if (savedInstanceState != null && savedInstanceState.containsKey("linkItems")) {
+            linkItems = savedInstanceState.getParcelableArrayList("linkItems");
+        } else {
+            linkItems = new ArrayList<>();
+        }
+
+
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // Save the list of link items
+        outState.putParcelableArrayList("linkItems", new ArrayList<>(linkItems));
+    }
 
 }
